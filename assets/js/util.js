@@ -255,7 +255,7 @@
 				});
 
 			// Event: Hide panel if a child anchor tag pointing to its ID is clicked.
-				$this.on('click', 'a[href="#' + id + '"]', function(event) {
+				$this.on('click', '#navPanelToggle', function(event) {
 
 					event.preventDefault();
 					event.stopPropagation();
@@ -267,12 +267,12 @@
 		// Body.
 
 			// Event: Hide panel on body click/tap.
-				$body.on('click touchend', function(event) {
+				$('body').on('click touchend', function(event) {
 					$this._hide(event);
 				});
 
 			// Event: Toggle.
-				$body.on('click', 'a[href="#' + id + '"]', function(event) {
+				$('body').on('click', '#navPanelToggle', function(event) {
 
 					event.preventDefault();
 					event.stopPropagation();
@@ -285,7 +285,7 @@
 
 			// Event: Hide on ESC.
 				if (config.hideOnEscape)
-					$window.on('keydown', function(event) {
+					$('window').on('keydown', function(event) {
 
 						if (event.keyCode == 27)
 							$this._hide(event);

@@ -6,13 +6,8 @@
 
 (function($) {
 
-	var	$window = $(window),
-		$body = $('body'),
-		$wrapper = $('#wrapper'),
-		$header = $('#header'),
-		$nav = $('#nav'),
-		$main = $('#main'),
-		$navPanelToggle, $navPanel, $navPanelInner;
+	var	$body = $('body'),
+		$navPanelToggle, $navPanel;
 
 	// Breakpoints.
 		breakpoints({
@@ -61,10 +56,10 @@
 					.removeClass('fixed')
 					.css('transform', 'matrix(1,0,0,1,0,0)');
 
-				$window
+				$(window)
 					.on('scroll._parallax', function() {
 
-						var pos = parseInt($window.scrollTop()) - parseInt($t.position().top);
+						var pos = parseInt($(window).scrollTop()) - parseInt($t.position().top);
 
 						$bg.css('transform', 'matrix(1,0,0,1,0,' + (pos * intensity) + ')');
 
@@ -78,7 +73,7 @@
 					.addClass('fixed')
 					.css('transform', 'none');
 
-				$window
+				$(window)
 					.off('scroll._parallax');
 
 			};
@@ -100,10 +95,10 @@
 
 		});
 
-		$window
+		$(window)
 			.off('load._parallax resize._parallax')
 			.on('load._parallax resize._parallax', function() {
-				$window.trigger('scroll');
+				$(window).trigger('scroll');
 			});
 
 		return $(this);
@@ -111,17 +106,17 @@
 	};
 
 	// Play initial animations on page load.
-		$window.on('load', function() {
+		$(window).on('load', function() {
 			window.setTimeout(function() {
 				$body.removeClass('is-preload');
 			}, 100);
 		});
 
 	// Scrolly.
-		$('.scrolly').scrolly();
+  // $('.scrolly').scrolly();
 
 	// Background.
-		$wrapper._parallax(0.925);
+		$('#wrapper')._parallax(0.925);
 
 	// Nav Panel.
 
@@ -129,18 +124,19 @@
 			$navPanelToggle = $(
 				'<a href="#navPanel" id="navPanelToggle">Menu</a>'
 			)
-				.appendTo($wrapper);
+				.appendTo($('#wrapper'));
 
 			// Change toggle styling once we've scrolled past the header.
-				$header.scrollex({
-					bottom: '5vh',
-					enter: function() {
-						$navPanelToggle.removeClass('alt');
-					},
-					leave: function() {
-						$navPanelToggle.addClass('alt');
-					}
-				});
+  // moved to app.js
+  //				$header.scrollex({
+  //					bottom: '5vh',
+  //					enter: function() {
+  //						$('#navPanelToggle').removeClass('alt');
+  //					},
+  //					leave: function() {
+  //						$('#navPanelToggle').addClass('alt');
+  //					}
+  //				});
 
 		// Panel.
 			$navPanel = $(
@@ -150,7 +146,7 @@
 					'<a href="#navPanel" class="close"></a>' +
 				'</div>'
 			)
-				.appendTo($body)
+				.appendTo($('#app'))
 				.panel({
 					delay: 500,
 					hideOnClick: true,
@@ -163,12 +159,16 @@
 				});
 
 			// Get inner.
-				$navPanelInner = $navPanel.children('nav');
+  //$navPanelInner = $navPanel.children('nav');
 
 			// Move nav content on breakpoint change.
-				var $navContent = $nav.children();
+  //var $navContent = $nav.children();
 
 				breakpoints.on('>medium', function() {
+
+          var $nav = $('#nav');
+          var $navPanel = $('#navPanel');
+          var $navContent = $navPanel.children('nav').children();
 
 					// NavPanel -> Nav.
 						$navContent.appendTo($nav);
@@ -181,7 +181,10 @@
 
 				breakpoints.on('<=medium', function() {
 
-					// Nav -> NavPanel.
+          var $nav = $('#nav');
+          var $navContent = $nav.children();
+          var $navPanelInner = $('#navPanel').children('nav').children();
+
 						$navContent.appendTo($navPanelInner);
 
 					// Flip icon classes.
@@ -193,7 +196,7 @@
 			// Hack: Disable transitions on WP.
 				if (browser.os == 'wp'
 				&&	browser.osVersion < 10)
-					$navPanel
+					$('#navPanel')
 						.css('transition', 'none');
 
 	// Intro.
@@ -203,11 +206,12 @@
 
 			// Hack: Fix flex min-height on IE.
 				if (browser.name == 'ie') {
-					$window.on('resize.ie-intro-fix', function() {
+					$(window).on('resize.ie-intro-fix', function() {
+            var $intro = $('#intro');
 
 						var h = $intro.height();
 
-						if (h > $window.height())
+						if (h > $(window).height())
 							$intro.css('height', 'auto');
 						else
 							$intro.css('height', h);
@@ -218,16 +222,18 @@
 			// Hide intro on scroll (> small).
 				breakpoints.on('>small', function() {
 
-					$main.unscrollex();
+					$('#main').unscrollex();
 
-					$main.scrollex({
+					$('#main').scrollex({
 						mode: 'bottom',
 						top: '25vh',
 						bottom: '-50vh',
 						enter: function() {
+              var $intro = $('#intro');
 							$intro.addClass('hidden');
 						},
 						leave: function() {
+              var $intro = $('#intro');
 							$intro.removeClass('hidden');
 						}
 					});
@@ -237,16 +243,18 @@
 			// Hide intro on scroll (<= small).
 				breakpoints.on('<=small', function() {
 
-					$main.unscrollex();
+					$('#main').unscrollex();
 
-					$main.scrollex({
+					$('#main').scrollex({
 						mode: 'middle',
 						top: '15vh',
 						bottom: '-15vh',
 						enter: function() {
+              var $intro = $('#intro');
 							$intro.addClass('hidden');
 						},
 						leave: function() {
+              var $intro = $('#intro');
 							$intro.removeClass('hidden');
 						}
 					});
