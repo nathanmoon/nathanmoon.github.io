@@ -51,29 +51,31 @@ const Intro = {
     Always strive to have no projects or sections of code that only one developer can understand or modify.  Nobody should be indispensable.
     Avoid making decisions in a vacuum; Request the input of others. Two heads are better than one.
   </p>
-  <h3>Let other developers know How, What, and Why</h3>
+  <h3>When coding, consider How, What, and Why</h3>
   <h4>How</h4>
   <p>
-    The <i>code itself</i> says how it is doing something.  It's better to have clear code than clever or optimized code.  Optimize only when it's absolutely required.  
+    The <i>code itself</i> says how it is doing something.  It's better to have clear code than clever or optimized code.  Optimize only when it's absolutely required.
     Comments should be rare and reserved for non-intuitive behaviors.  Comments often lie.
   </p>
   <h4>What</h4>
   <p>
     The <i>tests</i> says what the code is doing. They document the behavior under various circumstances.  If you want to know what the code is doing, you should be able
-    to find tests that explain it.  If you can't find a test to tell you how the code behaves with certain inputs, consider writing one!
+    to find tests that explain it.  If you can't find a test to tell you how the code behaves with certain inputs, consider writing one to find out!
   </p>
   <h4>Why</h4>
   <p>
-    The <i>commit messages</i> say why the code does what it does. Commit messages show context, thought process, and reasons for non-obvious behaviors.  
+    The <i>commit messages</i> say why the code does what it does. Commit messages show context, thought process, and reasons for non-obvious behaviors.
     If you don't understand why code was written the way it was, the commit messages should have the answers.
   </p>
   <hr/>
   <h2>No Egos</h2>
   <p>
-    Everyone should feel comfortable arguing for what they think is right.  The best idea should always win.
+    Everyone should feel comfortable arguing for what they think is right.  The best idea should always win. Be ready to defend ideas and beliefs with reasoning or,
+    even better, with data, or be ready to let them go.
   </p>
   <p>
-    Treat code reviews as learning opportunities.  Concentrate on getting better, not on looking good or being right. Don't get offended by feedback.
+    Treat code reviews as learning opportunities.  Concentrate on getting better, not on looking good or being right. Don't get offended by feedback. Be willing to put
+    in the necessary time to give others valuable code reviews.
   </p>
   <ul class="actions special">
     <router-link tag="li" to="/resume"><a class="button large">See My Resume</a></router-link>
@@ -89,55 +91,67 @@ const Intro = {
 const Resume = {
  template: `
 <section class="post">
-<header class="major">
-<h1>Resume</h1>
-<p>{{ basics.summary }}</p>
-</header>
-                <hr/>
-                <header>
-                  <h2>Skills</h2>
-                </header>
-                <p> TODO </p>
+  <header class="major">
+    <h1>Resume</h1>
+    <p>{{ basics.summary }}</p>
+  </header>
 
-                <hr/>
+  <hr/>
 
-                <header>
-                  <h2>Experience</h2>
-                </header>
-                <div v-for="experience in work">
-                  <header>
-                    <h3>{{experience.position}}</h3>
-                    <p>{{experience.company}} ({{experience.duration}}) {{experience.startDate}} - {{experience.endDate}}</p>
-                  </header>
-                  <p>{{experience.summary}}</p>
-                </div>
+  <header>
+    <h2>Skills</h2>
+  </header>
+  <p>
+    <div class="skills-list">
+      <div v-for="skill in skills" class="skill-item">
+      {{skill.name}}
+      </div>
+    </div>
+  </p>
 
-                <hr/>
+  <hr/>
 
-                <header>
-                  <h2>Education</h2>
-                </header>
-                <div v-for="school in education">
-                  <header>
-                    <h3>{{school.studyType}} - {{ school.area }}</h3>
-                    <p>{{school.institution}}. Graduated {{school.endDate}}</p>
-                  </header>
-                  <p>{{school.summary}}</p>
-                </div>
+  <header>
+    <h2>Experience</h2>
+  </header>
+  <div v-for="experience in work">
+    <header>
+      <h3>{{experience.position}}</h3>
+      <p>
+        <a href="{{experience.website}}"><b>{{experience.company}}</b></a>&nbsp;&nbsp;&nbsp;&nbsp;
+        <span v-if="experience.duration">({{experience.duration}})</span>
+        {{experience.startDate}} - <span v-if="experience.endDate">{{experience.endDate}}</span><span v-else>Present</span>
+      </p>
+    </header>
+    <p>{{experience.summary}}</p>
+  </div>
 
-                <hr/>
+  <hr/>
 
-                <header>
-                  <h2>Publications</h2>
-                </header>
-                <div v-for="pub in publications">
-                  <header>
-                    <h3>{{pub.name}}</h3>
-                    <p>{{pub.releaseDate}}</p>
-                  </header>
-                  <p>{{pub.publisher}}</p>
-                </div>
-              </section>
+  <header>
+    <h2>Education</h2>
+  </header>
+  <div v-for="school in education">
+    <header>
+      <h3>{{school.studyType}} - {{ school.area }}</h3>
+      <p>{{school.institution}}. Graduated {{school.endDate}}</p>
+    </header>
+    <p>{{school.summary}}</p>
+  </div>
+
+  <hr/>
+
+  <header>
+    <h2>Publications</h2>
+  </header>
+  <div v-for="pub in publications">
+    <header>
+      <h3>{{pub.name}}</h3>
+      <p>{{pub.releaseDate}}</p>
+    </header>
+    <p>{{pub.publisher}}</p>
+  </div>
+</section>
 
   `,
   data: function() {
@@ -185,7 +199,7 @@ const Resume = {
           "duration": "1 year",
           "startDate": "June 2017",
           "endDate": "July 2018",
-          "summary": "Working with Node.js, Vue.js, Postgres, Firebase in a microservice-ish architecture.",
+          "summary": "Working with Node.js, Vue.js, iOS, Android, Firebase, AWS to store and transform videos and photos into home movies.",
           "highlights": []
         },
         {
@@ -195,7 +209,7 @@ const Resume = {
           "duration": "5 years",
           "startDate": "June 2012",
           "endDate": "June 2017",
-          "summary": "Designed RESTful APIs in Python on top of PostgreSQL. Worked on our React/Redux frontend. Added Elasticsearch to the stack to handle search and facets. Learned a lot about Amazon Web Services. Submitted 1 patent. Led multiple teams. Awarded \"Founders Club\" for 2013.",
+          "summary": "Designed RESTful APIs in Python on top of PostgreSQL. Worked on the React/Redux frontend. Added Elasticsearch to the stack to handle search and facets. Learned a lot about Amazon Web Services. Submitted 1 patent. Led multiple teams. Awarded \"Founders Club\" for 2013.",
           "highlights": []
         },
         {
@@ -205,7 +219,7 @@ const Resume = {
           "duration": "1 year",
           "startDate": "February 2011",
           "endDate": "June 2012",
-          "summary": "Primarily worked as a developer, while overseeing a small development team. Gained experience in Solr/Lucene.",
+          "summary": "Oversaw a small team while primarily spending time developing. Gained experience in Solr/Lucene and designing search systems.",
           "highlights": []
         },
         {
