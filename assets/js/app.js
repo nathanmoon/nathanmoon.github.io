@@ -43,7 +43,7 @@ const Intro = {
     <li>Tests are worth refactoring.</li>
   </ul>
   <p>
-    Most of these philosophies can be wrapped up as "No Heroes, No Egos":
+    A large part of my philosophy on software development can be wrapped up as what I have titled "No Heroes, No Egos":
   </p>
   <hr/>
   <h2>No Heroes</h2>
@@ -118,7 +118,7 @@ const Resume = {
     <header>
       <h3>{{experience.position}}</h3>
       <p>
-        <a href="{{experience.website}}"><b>{{experience.company}}</b></a>&nbsp;&nbsp;&nbsp;&nbsp;
+        <a :href="experience.website"><b>{{experience.company}}</b></a>&nbsp;&nbsp;&nbsp;&nbsp;
         <span v-if="experience.duration">({{experience.duration}})</span>
         {{experience.startDate}} - <span v-if="experience.endDate">{{experience.endDate}}</span><span v-else>Present</span>
       </p>
