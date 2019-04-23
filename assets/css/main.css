@@ -3798,6 +3798,22 @@ body.is-preload #intro:not(.hidden) + #header + #nav {
 }
 
 .skill-item {
-  margin-left: 10px;
-  margin-right: 10px;
+  margin: 10px 30px 10px 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.skill-item-primary {
+  font-size: 14pt;
+  line-height: 12pt;
+}
+
+.skill-item-secondary {
+  font-size: 10pt;
+}
+
+.skill-item-secondary > .skill-item-secondary-item {
+  margin-left: 5px;
+  margin-right: 5px;
 }

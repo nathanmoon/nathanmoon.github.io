@@ -104,7 +104,12 @@ const Resume = {
   <p>
     <div class="skills-list">
       <div v-for="skill in skills" class="skill-item">
-      {{skill.name}}
+      <span class="skill-item-primary">{{skill.name}}</span>
+      <span class="skill-item-secondary">
+        <span class="skill-item-secondary-item" v-for="sub in skill.keywords">
+        {{sub}}
+        </span>
+      </span>
       </div>
     </div>
   </p>
@@ -300,7 +305,7 @@ const Resume = {
         {
           "name": "JavaScript",
           "level": "",
-          "keywords": ["Node", "React"]
+          "keywords": ["Node", "React", "Vue"]
         },
         {
           "name": "Python",
@@ -308,25 +313,22 @@ const Resume = {
           "keywords": ["Django", "Flask"]
         },
         {
-          "name": "Java",
-          "level": "",
-          "keywords": []
-        },
-        {
           "name": "Relational Databases",
           "level": "",
           "keywords": ["SQL", "PostgreSQL", "MySQL"]
         },
         {
-          "name": "ElasticSearch",
+          "name": "Search",
           "level": "",
-          "keywords": []
+          "keywords": ["ElasticSearch", "Solr"]
         },
         {
-          "name": "AWS"
+          "name": "Cloud",
+          "keywords": ["AWS", "Google", "Firebase"]
         },
         {
-          "name": "Firebase"
+          "name": "Mobile",
+          "keywords": ["iOS", "Android"]
         }
       ],
       "languages": [
