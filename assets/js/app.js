@@ -194,7 +194,7 @@ const Resume = {
           "position": "Software Developer",
           "website": "https://rivethealth.com",
           "startDate": "May 2019",
-          "summary": "Building software for practices to help them manage how they get paid, and be able to provide clear friendly estimates to patients.",
+          "summary": "Building healthcare software for practices to help them manage how they get paid, and be able to provide clear friendly estimates to patients.",
           "highlights": []
         },
         {
