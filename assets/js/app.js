@@ -190,11 +190,21 @@ const Resume = {
       },
       "work": [
         {
+          "company": "Rivet",
+          "position": "Software Developer",
+          "website": "https://rivethealth.com",
+          "startDate": "May 2019",
+          "summary": "Building software for practices to help them manage how they get paid, and be able to provide clear friendly estimates to patients.",
+          "highlights": []
+        },
+        {
           "company": "Yours.co",
           "position": "CTO",
           "website": "https://yours.co",
+          "duration": "1 year",
           "startDate": "July 2018",
-          "summary": "Directing and leading the technology behind Yours.co.  Bringing back long-form home movies without the hassle. Pick photos and videos, and Yours.co does the rest, delivering home movies with music and transitions.",
+          "endDate": "April 2019",
+          "summary": "Directed and led the technology behind Yours.co.  Long-form home movies without the hassle.",
           "highlights": []
         },
         {
